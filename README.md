@@ -6,10 +6,11 @@
    
    *Use instructions on how to deploy it onto Raspberry (trick: to have internet connection while using ssh to set all stuff, plug Ethernet cable into Raspberry)*
    
-- On the first launch use `sudo raspi-config` to turn camera support on and resize OS to the whole memory card. Then reboot.
-Then use instructions onto deployment of Turtlebot3 packages
+- On the first launch use `sudo raspi-config` to turn camera support on and resize OS to the whole memory card. Then **reboot**.
 
-**NB: Avoid " `wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic_rp3.sh && chmod 755 ./install_ros_kinetic_rp3.sh && bash ./install_ros_kinetic_rp3.sh `" – this will introduce disorder into preconfigured by Ubiquity packages!**
+2) Use instructions onto deployment of [Turtlebot3 packages](http://emanual.robotis.com/docs/en/platform/turtlebot3/raspberry_pi_3_setup/#raspberry-pi-3-setup).
+
+**NB: Avoid `wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic_rp3.sh && chmod 755 ./install_ros_kinetic_rp3.sh && bash ./install_ros_kinetic_rp3.sh ` – this will introduce disorder into preconfigured by Ubiquity packages!**
 
 Avoid *"size optimization"* step with packages deleting. In general those packages are used on a PC part in PC+Tb3 setting, but we tun but for current stage we'd decided to leave all code as it is. 
 `sudo rm -r turtlebot3_description/ turtlebot3_teleop/ turtlebot3_navigation/ turtlebot3_slam/ turtlebot3_example/`
