@@ -1,0 +1,30 @@
+<launch>
+    <group ns="cameras">
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+         <arg name="time" value="12" />
+         <arg name="pkg" value="rxr1_demo_upstart" />
+         <arg name="file" value="usb_cameras.launch" />
+         <arg name="node_name" value="timed_roslaunch_cameras" /> <!-- This is optional argument -->
+    </include>
+    </group>
+
+    <group ns="ws">
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="12" />
+        <arg name="pkg" value="rxr1_demo_upstart" />
+        <arg name="file" value="rosbridge_ws.launch" />
+             <!--<arg name="value" value="port:=9998" />-->
+             <!--<arg name="value" value="initial_pose_x:=17.0 initial_pose_y:=17.0" />-->
+        <arg name="node_name" value="timed_roslaunch_webserver" /> <!-- This is optional argument -->
+    </include>
+    </group>
+    <group ns="bringup">
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="12" />
+        <arg name="pkg" value="rxr1_demo_upstart" />
+        <arg name="file" value="tb3_bringup.launch" />
+        <arg name="node_name" value="timed_roslaunch_robot" /> <!-- This is optional argument -->
+     </include>
+    </group>
+    <!--<include file="$(find rxr1_demo_upstart)/launch/usb_cameras.launch"-->
+</launch>
