@@ -17,9 +17,7 @@ Avoid *"size optimization"* step with packages deleting. In general those packag
  
 
 ## Steps for onboard camera installation
-NB: when running example like  `roslaunch usb_cam usb_cam-test.launch`, go to launch file itself and set appropriate camera device (if you have several of them, set like <param name="video_device" value="/dev/video1" /> )
-
-## udev 
+### udev 
 - to get info on your vebcams:
 `lsusb -v` -- you need some properties to identify them further in udev rules.
 udev rules needed to grant access to camera resources:
@@ -31,6 +29,16 @@ change file to add access to your cameras like this, aim is to change access-mod
 SUBSYSTEMS=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="046d", MODE="0666"
 # ^ Change the vendor and product IDs to match your camera.
 ```
+
+
+### parameters 
+```
+sudo apt-get install ros-kinetic-libuvc-ros ros-kinetic-libuvc-camera
+```
+
+NB: when running example like  `roslaunch libuvc_camera test.launch` or configuring rxr1 package for your turtlebot setting, go to usb cameras launchfile itself and set appropriate camera devices via specifying **vendor**, **product** and **serial** parameters.
+*if you have several identical cameras (with identical "serial" values) , set <param name="index" value="0"/> and  <param name="index" value="1"/> for first and second cameras*. 
+
 
 
 ## packages for speech-control
