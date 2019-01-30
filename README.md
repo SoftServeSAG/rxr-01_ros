@@ -17,10 +17,7 @@ Avoid *"size optimization"* step with packages deleting. In general those packag
  
 
 ## Steps for onboard camera installation
-USB-camera software can be installed via `sudo apt-get install ros-kinetic-usb-cam`
-and `sudo apt-get install ros-kinetic-libuvc` -- we use this one because 'vanilla' usb-cam 
-also `rosdep install libuvc_camera libuvc_ros`
-NB: when running example like 'roslaunch usb_cam usb_cam-test.launch', go to launch file itself and set appropriate camera device (if you have several of them, set like <param name="video_device" value="/dev/video1" /> )
+NB: when running example like  `roslaunch usb_cam usb_cam-test.launch`, go to launch file itself and set appropriate camera device (if you have several of them, set like <param name="video_device" value="/dev/video1" /> )
 
 ## udev 
 - to get info on your vebcams:
@@ -39,13 +36,24 @@ SUBSYSTEMS=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="046d", MODE="06
 ## packages for speech-control
 # TODO
 
+
+# dependancies install: script
+```
+roscd rxr1_demo_upstart
+cd ../..
+rosdep install --from-path src
+catkin_make
+```
+
+
 ## upstart configure 
+After you've tuned the usb_cameras.launch with appropriate parameters general upstart initialisation can be performed.
+
 example: 
-
-`rosrun robot_upstart install turtlebot3_bringup/launch/turtlebot3_robot.launch --logdir /home/ubuntu/logs/tb3_bringup --user ubuntu`
-
-# TODO make it all as install script
-# websocket:
-```sudo apt install ros-kinetic-rosbridge-server ros-kinetic-rosbridge-suite```
-
-# services daemons autorun
+*as the launch procedure directly depends on launch timeout which shold be tuned, more convinient logging directory wold be nice to have*
+```
+mkdir /home/ubuntu/logs/ && mkdir /home/ubuntu/logs/rxr1_bringup
+chmod +rw /home/ubuntu/logs/rxr1_bringup
+rosrun robot_upstart install rxr1_demo_upstart/launch/rxr1_demo_upstart.launch --logdir /home/ubuntu/logs/rxr1_bringup --user ubuntu
+sudo systemctl daemon-reload && sudo systemctl start rxr1
+```
